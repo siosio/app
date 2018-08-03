@@ -6,7 +6,7 @@ pipeline {
     stage('Build') {
       steps {
         git branch: 'master', url: 'https://github.com/siosio/app.git'
-        sh 'mvn install -DskipTests=true'
+        sh 'mvn install -DskipTests=true -Dmaven.repo.remote=${MAVEN_MIRROR_URL}'
       }
     }
     stage('Test') {
