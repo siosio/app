@@ -12,6 +12,12 @@ pipeline {
     }
     stage('Test') {
       steps {
+        openshift.withCluster() {
+          openshift.withCluster(env.DEV_PROJECT) {
+            def secrets = openshift.selector("secrets", "keel-postgresql")
+            println(secrets)
+          }
+        }
         sh 'echo "なにもしない"'
       }
     }
